@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con Javascript</title>
+</head>
+<body>
+    
+    <h1>Alta cliente</h1>
+    <form action="alta-cliente.php" onsubmit="return validaFormulario()">
+        <p>
+            <label for="nombre">Nombre: <input type="text" name="nombre" id="nombre" placeholder="Escribe tu nombre"></label> <!--Siempre id para poner el for-->
+        </p>
+        <p>
+            <label for="edad">Edad: <input type="number" name="edad" id="edad" placeholder="Dime tu edad"></label>
+        </p>
+        <p>
+            <label for="provincia">Provincia: 
+                <select name="provincia" id="provincia">
+                    <option value="elije">Elije uno...</option>
+                    <option value="cr">Ciudad Real</option>
+                    <option value="ab">Albacete</option>
+                    <option value="to">Toledo</option>
+                    <option value="cu">Cuenca</option>
+                </select>
+            </label>
+        </p>
+        <p>
+            <label for="acepto">He leído y acepto las condiciones <input type="checkbox" id="acepto" name="acepto" checked></label>
+        </p>
+        <p>
+            <label for="contrasena">Contraseña: <input type="password" id="contrasena" name="contrasena"></label>
+        </p>
+        <p>
+            <label for="rcontrasena">Repite contraseña: <input type="password" id="rcontrasena" name="rcontrasena"></label>
+        </p>
+
+        <input type="submit" value="Dar de alta"> <!--Este es el botón-->
+    </form>
+
+    <script>
+        function validaFormulario(){
+            let nombre=document.getElementById("nombre");
+            if(nombre.value.length<=6){
+                alert("La longitud mínima del nombre es de 6 caracteres");
+                nombre.focus(); /*Si hay un error el autofocus irá por defecto al error*/
+                return false;
+            }
+            let edad=document.getElementById("edad");
+            if(edad.value<18){
+                alert("Eres menor de edad, no puedo mandar los datos");
+                edad.focus();
+                return false;
+            }
+
+            let provincia=document.getElementById("provincia");
+            if(provincia.value=="elije"){
+                alert("Selecciona una provincia");
+                provincia.focus();
+                return false;
+            }
+
+            let acepto=document.getElementById("acepto");
+            if(acepto.checked==false){
+                alert("Tienes que aceptar las condiciones");
+                acepto.focus();
+                return false;
+            }
+
+            let contrasena=document.getElementById("contrasena");
+            let rcontrasena=document.getElementById("rcontrasena");
+            if(contrasena.value!=rcontrasena.value){
+                alert("Las contraseñas no coinciden");
+                contrasena.focus();
+                return false;
+            }
+
+            alert("Datos correctos. Procedo a enviar");
+            return true;
+
+        }
+    </script>
+
+</body>
+</html>
